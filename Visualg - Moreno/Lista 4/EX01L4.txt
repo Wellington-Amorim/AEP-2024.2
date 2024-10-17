@@ -1,0 +1,18 @@
+algoritmo "caracteresDe4A30"
+// EX01) Solicite uma palavra (mínimo 4 e máximo 30 caracteres) e apresente a
+//quantidade de caracteres na mesma.
+// Autor : Wellington Amorim de Sousa
+// RA : 24214926-2
+// Data : 04/09/2024
+var
+nome: caractere
+i: inteiro
+inicio
+ repita
+  escreval("Escreva algo entre 4 e 30 caracteres:")
+   leia(nome)
+  i <- compr(nome)
+  escreval("---------------------------------------------")
+ ate(i >= 4) e (i <=30)
+ escreval("A quantidade de caractere é:",i)
+fimalgoritmo

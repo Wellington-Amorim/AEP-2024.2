@@ -1,0 +1,26 @@
+algoritmo "vogais"
+// EX15)Solicite uma string e apresente a quantidade de vogais da mesma.
+// Autor : Wellington Amorim de Sousa
+// RA : 24214926-2
+// Data : 08/09/2024
+var
+  nome, c: caractere          //c = é o caractere
+  i, vogal: inteiro                  //i = para fazer o "para"
+inicio
+  escreval("Escreva qualquer coisa:")     //entrada
+    leia(nome)
+  
+  para i de 1 ate compr(nome) faca
+    c <- copia(nome,i,1)
+    se(c = "a")ou (c = "e") ou(c = "i") ou(c = "o") ou(c = "u") entao  //se for vogal,
+      vogal <- vogal + 1                                               //somar vogal
+    fimse
+  fimpara
+  
+  escreval("-----------------------------------------------")
+  se(vogal <= 1) entao                                   //singular
+    escreval("Há",vogal," vogal na sua frase.") //saída
+  senao                                                  //plural
+    escreval("Há",vogal," vogais na sua frase.") //saída
+  fimse
+fimalgoritmo

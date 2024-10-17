@@ -1,0 +1,20 @@
+algoritmo "nomeIdade3pFacaEnquanto"
+// EX02) Solicitar o nome e idade de 3 pessoas (utilize a estrutura FAÇA ENQUANTO)
+// Autor : Wellington Amorim de Sousa
+// Data : 29/08/2024
+// RA: 24214926-2
+var
+nome: caractere
+idade, i: inteiro            //i serve para fazer o loop
+inicio
+i <- 1
+enquanto i <= 3 faca
+ escreva("NOME: ")
+  leia(nome)
+ escreva("IDADE: ")
+  leia(idade)
+ i <- i + 1
+fimenquanto          //fim do loop
+
+fimalgoritmo
+

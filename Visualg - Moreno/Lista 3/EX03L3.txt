@@ -1,0 +1,17 @@
+algoritmo "nomeIdade3pPara"
+// EX03) Solicite o nome e idade dde 3 pessoas(utilize a estrutura PARA)
+// Autor : Wellington Amorim de Sousa
+// Data : 28/08/2024
+// RA: 24214926-2
+var
+nome: caractere
+idade, i: inteiro            //i serve para fazer o loop
+inicio
+i <- 1
+para i de 1 ate 3 faca
+ escreva("Nome da pessoa",i,": ")
+  leia(nome)
+ escreva("Idade da pessoa",i,": ")
+  leia(idade)
+fimpara             //fim do loop
+fimalgoritmo

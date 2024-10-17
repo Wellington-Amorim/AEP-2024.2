@@ -1,0 +1,60 @@
+// EX14) Solicite os dados de 12 pessoas (nome, idade, sexo, quantidade de filhos) e posteriormente apresente:
+//a) O percentual de homens
+//b) A média de idade das mulheres (sem filhos)
+//c) O nome e idade da pessoa mais jovem
+//d) A quantidade de mulheres entrevistadas
+//Obs. Todos os dados deverão ser validados na entrada
+// Wellington Amorim de Sousa
+// RA: 24214926-2
+// 01/09/2024
+algoritmo "dadosDe12Pessoas"
+var
+ i, idade, filhos, mjovem, mediaF, FS: inteiro //i = faz o loop; mjovem = determina a mais jovem; mediaF = média da idade feminina; FS = soma as mulheres sem filhos.
+ nome, sexo, nomej, validar: caractere //nomej = nome da mais jovem.
+ M, F: real    //M = soma a quantidade de homens; F = soma a quantidade de mulheres.
+inicio
+ mjovem <- 200           //ajuda em ler e determinar a mais jovem
+ para i de 1 ate 12 faca              //loop
+ escreval(i,"ª PESSOA")
+ repita           //loop da validação
+   escreval("Qual o seu nome?")       //entradas
+    leia(nome)
+   escreval("Quantos anos você tem?")
+    leia(idade)
+   repita
+    escreval("Qual o seu sexo?(F/M)")
+     leia(sexo)
+   ate(sexo = "F") ou (sexo = "M")
+   
+   escreval("Quantos filhos você tem?")
+    leia(filhos)
+   escreval("Os seus dados estão certos?(SIM/NAO)")
+    leia(validar)
+ ate(validar = "SIM")   //fim do loop da validação
+
+  se(sexo = "F") entao  //quantidade de mulheres
+     F <- F + 1
+  senao
+     M <- M + 1         //quantidade  de homens
+  fimse
+
+   se(sexo = "F") entao          //se for mulher
+     se(filhos = 0) entao        //e não tiver filho
+       mediaF <- mediaF + idade    //armazena a idade de mulheres sem filho na média
+       FS <- FS + 1            //soma a quantidade de mulheres sem filho
+     fimse
+   fimse
+   
+   se(idade < mjovem) entao    //armazena a idade e o nome da mais jovem
+     mjovem <- idade
+     nomej <- nome
+   fimse
+   
+   escreval("-------------------------------------------------------------------")  //separa as pessoas na tela
+ fimpara         //fim loop
+  M <- M*100/12       //faz o percentual masculino
+ escreval("                   O percentual de homens é:",M:7:2,"%")   //saídas
+ escreval("A média das idades das mulheres sem filho é:",mediaF/FS)
+ escreval("      O nome e idade da pessoa mais jovem é: ",nomej,", com",mjovem," anos.")
+ escreval("   A quantidade de mulheres entrevistadas é:",F,".")
+fimalgoritmo

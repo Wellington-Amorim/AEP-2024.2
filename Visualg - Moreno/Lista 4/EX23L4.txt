@@ -1,0 +1,15 @@
+algoritmo "ConverterParaMinusculo"
+// EX23)Solicite uma string e apresente-a totalmente convertida em minúsculo.
+// Autor : Wellington Amorim de Sousa
+// RA : 24214926-2
+// Data : 08/09/2024
+var
+  nome: caractere
+
+inicio
+  escreval("Escreva qualquer coisa:")     //entrada
+    leia(nome)
+    
+  escreval("-------------------------------------") //pra ficar bonitinho na tela
+  escreval(minusc(nome))
+fimalgoritmo

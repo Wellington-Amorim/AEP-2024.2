@@ -1,0 +1,13 @@
+algoritmo "nomeEmMinusculo"
+// EX03) Solicite uma string qualquer e apresenta-a toda em minúsculo ao usuário.
+// Autor : Wellington Amorim de Sousa
+// RA : 24214926-2
+// Data : 01/09/2024
+var
+ nome, converter: caractere
+inicio
+ escreval("Escreva alguma coisa para convertê-la em minúculo:") //entrada
+   leia(nome)
+ converter <- minusc(nome)      //converte e armazena na veriável
+ escreval(converter)             //apresenta tudo em minúsculo
+fimalgoritmo

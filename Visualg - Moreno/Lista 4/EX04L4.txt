@@ -1,0 +1,20 @@
+algoritmo "nomeEmCapsLock"
+// EX04) Solicite uma string qualquer e apresente cada o valor ASCII de cada
+//caractere. Exemplo:
+//Entrada: ALE
+//Saída: A = 65
+//L = 76
+//E = 69
+// Autor : Wellington Amorim de Sousa
+// RA : 24214926-2
+// Data : 03/09/2024
+var
+nome: caractere
+i: inteiro         //i seve para o "para" e a posição do "copia"
+inicio
+ escreval("Escreva algo:") //entrada
+   leia(nome)
+ para i de 1 ate compr(nome) faca
+   escreval(copia(nome,i,1)," =",asc(copia(nome,i,1))) //o "copia" apresenta as letras. o "asc" retorna o valor decimal segundo a tabela ASCII
+ fimpara
+fimalgoritmo

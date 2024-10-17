@@ -1,0 +1,22 @@
+algoritmo "jose"
+// EX12)Solicite uma string e apresente-a caractere a caractere, linha a linha.
+//Exemplo: JOSE
+//J
+//O
+//S
+//E
+// Autor : Wellington Amorim de Sousa
+// RA : 24214926-2
+// Data : 07/09/2024
+var
+  nome, c: caractere          //c = é o caractere
+  i: inteiro                  //i = para fazer o "para"
+inicio
+  escreval("Escreva qualquer coisa entre 5 e 20 caracteres:")     //entrada
+    leia(nome)
+
+  para i de 1 ate compr(nome) faca
+    c <- copia(nome,i,1)
+    escreval(c)           //saída dos caracteres
+  fimpara
+fimalgoritmo

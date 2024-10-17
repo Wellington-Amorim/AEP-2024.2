@@ -1,0 +1,135 @@
+// EX15) Crie um algoritmo chamado Zodíaco. Este algoritmo deve solicitar parcialmente a data de nascimento (dia e mês) e
+//apresentar o seu signo, conforme tabela abaixo:
+//- 1o signo do zodíaco: Aquário (21/jan a 19/fev)                 1 e 2
+//- 2o signo do zodíaco: Peixes (20/fev a 20/mar)                  2 e 3
+//- 3o signo do zodíaco: Áries (21/mar a 20/abr)                   3 e 4
+//- 4o signo do zodíaco: Touro (21/abr a 20/mai)                   4 e 5
+//- 5o signo do zodíaco: Gêmeos (21/mai a 20/jun)                  5 e 6
+//- 6o signo do zodíaco: Câncer (21/jun a 21/jul)                  6 e 7
+//- 7o signo do zodíaco: Leão (22/jul a 22/ago)                    7 e 8
+//- 8o signo do zodíaco: Virgem (23/ago a 22/set)                  8 e 9
+//- 9o signo do zodíaco: Libra (23/set a 22/out)                   9 e 10
+//- 10o signo do zodíaco: Escorpião (23/out a 21/nov)             10 e 11
+//- 11o signo do zodíaco: Sagitário (22/nov a 21/dez)             11 e 12
+//- 12o signo do zodíaco: Capricórnio (22/dez a 20/jan)           12 e 1
+//No final, pergunte ao usuário se ele deseja continuar (S ou N)
+// Wellington Amorim de Sousa
+// RA: 24214926-2
+// 01/09/2024
+algoritmo "zodiaco"
+var
+ dia, mes: inteiro
+ continuar: caractere
+inicio
+ repita        //loop
+  escreval("Em qual mês você nasceu?(EX: 01 para Janeiro; ... ; 12 para Dezembro.)")
+    leia(mes)
+  escreval("Em qual dia? ")
+    leia(dia)
+
+ escolha(mes)         //escolha dos casos
+  caso 1
+    se(dia < 21) entao
+      escreval("O seu sígno é Capricórnio :)")
+    fimse
+    se(dia >= 21) entao
+      escreval("O seu sígno é Aquário :)")
+    fimse
+    
+  caso 2
+    se(dia < 20) entao
+      escreval("O seu sígno é Aquário :)")
+    fimse
+    se(dia >= 20) entao
+      escreval("O seu sígno é Peixes :)")
+    fimse
+    
+  caso 3
+    se(dia < 21) entao
+      escreval("O seu sígno é Peixes :)")
+    fimse
+    se(dia >= 21) entao
+      escreval("O seu sígno é Áries :)")
+    fimse
+    
+  caso 4
+    se(dia < 21) entao
+      escreval("O seu sígno é Áries :)")
+    fimse
+    se(dia >= 21) entao
+      escreval("O seu sígno é Touro :)")
+    fimse
+    
+  caso 5
+    se(dia < 21) entao
+      escreval("O seu sígno é Touro :)")
+    fimse
+    se(dia >= 21) entao
+      escreval("O seu sígno é Gêmeos :)")
+    fimse
+    
+  caso 6
+    se(dia < 21) entao
+      escreval("O seu sígno é Gêmeos :)")
+    fimse
+    se(dia >= 21) entao
+      escreval("O seu sígno é Câncer :)")
+    fimse
+
+  caso 7
+    se(dia < 22) entao
+      escreval("O seu sígno é Câncer :)")
+    fimse
+    se(dia >= 22) entao
+      escreval("O seu sígno é Leão :)")
+    fimse
+    
+  caso 8
+    se(dia < 23) entao
+      escreval("O seu sígno é Leão :)")
+    fimse
+    se(dia >= 23) entao
+      escreval("O seu sígno é Virgem :)")
+    fimse
+    
+  caso 9
+    se(dia < 23) entao
+      escreval("O seu sígno é Virgem :)")
+    fimse
+    se(dia >= 23) entao
+      escreval("O seu sígno é Libra :)")
+    fimse
+    
+  caso 10
+    se(dia < 23) entao
+      escreval("O seu sígno é Libra :)")
+    fimse
+    se(dia >= 23) entao
+      escreval("O seu sígno é Escorpião :)")
+    fimse
+    
+  caso 11
+    se(dia < 22) entao
+      escreval("O seu sígno é Escorpião :)")
+    fimse
+    se(dia >= 22) entao
+      escreval("O seu sígno é Sagitário :)")
+    fimse
+    
+  caso 12
+    se(dia < 22) entao
+      escreval("O seu sígno é Sagitário :)")
+    fimse
+    se(dia >= 22) entao
+      escreval("O seu sígno é Capricórnio :)")
+    fimse
+    
+  outrocaso
+    escreval("Só existe 12 meses, irmão.")
+    
+ fimescolha             //fim do escolha caso
+ escreval("Deseja continuar?(S ou N)")
+  leia(continuar)
+  escreval("----------------------------------------------------------------------")
+ ate(continuar = "N")        //fim do loop
+fimalgoritmo

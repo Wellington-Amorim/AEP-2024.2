@@ -1,0 +1,26 @@
+algoritmo "MaiorCaractere"
+// EX09) Solicite uma string qualquer e apresente qual é o caractere que possui o
+//maior valor segundo o valor da tabela ASCII.
+// Autor : Wellington Amorim de Sousa
+// RA : 24214926-2
+// Data : 07/09/2024
+var
+ nome, letra, maiorL: caractere     //maiorL = define a maior letra
+ i, maior: inteiro
+inicio
+ maior <- 0        //maior começa com 0
+ 
+ escreval("Escreva algo:") //entrada
+   leia(nome)
+    
+ para i de 1 ate compr(nome) faca   //para ler a string
+  letra <- copia(nome,i,1)
+  i <- asc(letra)
+  se(i > maior) entao    //se o caractere da string for maior, então maior o número ASCII e maiorL recebe o caractere
+    maior <- i
+    maiorL <- carac(i)
+  fimse
+ fimpara                 //fim para
+ escreval("-------------------------------------------------")
+ escreval("O maior caractere segundo a tabela ASCII é: ",maiorL)       //apresenta o maior caractere
+fimalgoritmo

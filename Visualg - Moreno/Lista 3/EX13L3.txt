@@ -1,0 +1,32 @@
+// EX13) Solicite o nome completo e a idade de 5 pessoas. No final, apresente o nome da pessoa mais velha e também o nome da pessoa mais jovem.
+// Wellington Amorim de Sousa
+// RA: 24214926-2
+// 31/08/2024
+algoritmo "nomeIdadeVelhaJovem"
+var
+nome, nomev, nomej: caractere        //nomev = nome do mais velho. nomej = nome do mais jovem
+idade, mvelha, mjovem, i: inteiro    //i é para fazer o loop. mvelha = idade do mais velho. mjovem = idade do mais jovem
+inicio
+mvelha <- 0
+mjovem <- 200           //para o "se" da linha 23 ler a idade
+para i de 1 ate 5 faca              //loop
+ escreval(i,"ºEscreva o seu nome completo:")
+  leia(nome)
+ escreval(" Digite a sua idade:")
+  leia(idade)
+
+ se(idade > mvelha) entao      //ler a mais velha
+   mvelha <- idade
+   nomev <- nome
+ fimse
+ 
+ se(idade < mjovem) entao     //ler a mais jovem
+   mjovem <- idade
+   nomej <- nome
+ fimse
+ 
+ escreval("-----------------------------------")       //separar as pessoas na tela
+fimpara                                          //fim do loop
+escreval("O nome do mais velho é ",nomev,".")
+escreval("O nome do mais jovem é ",nomej,".")
+fimalgoritmo

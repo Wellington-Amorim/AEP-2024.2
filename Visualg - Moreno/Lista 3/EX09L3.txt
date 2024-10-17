@@ -1,0 +1,15 @@
+algoritmo "numerosParesDe5A50"
+// EX09) Apresente todos os números ímpares entre 5 e 50 (um na frente do outro) – Utilize o PARA.
+// Autor : Wellington Amorim de Sousa
+// Data : 30/08/2024
+// RA: 24214926-2
+var
+num, i: inteiro    //i serve para fazer o loop
+inicio
+num <- 3                  //num recebe 3 para apresentar o número 5. Motivo: linha 11 pula os números de 2 em 2
+para i de 1 ate 23 faca        //início loop
+ num <- num + 2           //pula os números pares
+ escreva(num,",")                //apresenta os números
+fimpara                    //fim do loop
+escreva(" fim.")
+fimalgoritmo      //Fim do código.

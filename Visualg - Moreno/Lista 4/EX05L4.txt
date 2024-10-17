@@ -1,0 +1,19 @@
+algoritmo "pedir10Apresentar4Caracteres"
+// EX5) Solicite uma string (mínimo 10 caracteres) e apresente apenas os 4
+//primeiros caracteres.
+// Autor : Wellington Amorim de Sousa
+// RA : 24214926-2
+// Data : 04/09/2024
+var
+nome: caractere
+i: inteiro        //serve para fazer o loop
+inicio
+ repita          //o loop é para o nomme receber até 10 caracteres
+  escreval("Escreva algo de até 10 caracteres:")
+   leia(nome)
+   i <- compr(nome)
+  escreval("---------------------------------------------")
+ ate(i <= 10)     //fim loop
+ nome <- copia(nome,1,4)    //nome recebe os 4 primeiros caracteres
+ escreval(nome)
+fimalgoritmo

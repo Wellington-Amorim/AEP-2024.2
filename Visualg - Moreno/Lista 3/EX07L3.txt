@@ -1,0 +1,23 @@
+algoritmo "numeroEntre10E50"
+// EX07) Solicite 15 número (entre 10 e 50) e apresente posteriormente a média.
+// Autor : Wellington Amorim de Sousa
+// Data : 29/08/2024
+// RA: 24214926-2
+var
+num, i: inteiro
+media: real
+inicio
+para i de 1 ate 15 faca
+      escreval("Digite de 10 à 50 para o",i,"º número: ")   //entrada do número
+      leia(num)
+         repita
+           se(num < 10) ou (num > 50) entao
+             escreval("Digite apenas números entre 10 e 50 para o",i,"° número: ")
+              leia(num)
+           fimse
+         ate(num >= 10) e (num <= 50)
+      media <- media + num
+fimpara
+ media <- media / 15
+escreva("A média é:",media:7:2)
+fimalgoritmo                                 //fim código
