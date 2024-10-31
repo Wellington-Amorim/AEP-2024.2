@@ -30,9 +30,9 @@ int main() {
 return 0;
 }
 
-// --------------------------------------- Área de Funções ---------------------------------------------------
+// ========================================== Área de Funções ================================================
 // Função trazida do <conio.c> (precisa do <windows.h> 
-void gotoxy(int x, int y) 
+void gotoxy(int x, int y) 									//GOTOXY
 { 
    COORD c;
 
@@ -44,10 +44,10 @@ void gotoxy(int x, int y)
    c.Y = vActual.wintop + y - 1;
    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), c);
 }
-
+// -----------------------------------------------------------------------------------------------------------
 /* Menu: desenha a borda e realca a opcao selecionada, chamando o procedimento desejado
   ao apertar enter - Uma variavel muda de valor conforme se aperta as setas, mudando o realce */
-void menu() {
+void menu() {											//MENU
 	int op = 1, ch, i;
 	
 	// Desenha o menu
@@ -97,9 +97,9 @@ void menu() {
 		}				
 	} while(ch != 27);
 }
-
+// -----------------------------------------------------------------------------------------------------------
 // Função trazida do <conio.c> (precisa do <windows.h>
-void textbackground(int newcolor) 
+void textbackground(int newcolor) 							//TEXTBACKGROUND
 {
    CONSOLE_SCREEN_BUFFER_INFO csbi;
 
@@ -108,9 +108,9 @@ void textbackground(int newcolor)
       (csbi.wAttributes & 0x0f) | (newcolor << 4));
    vActual.attribute = (csbi.wAttributes & 0x0f) | (newcolor << 4);
 }
-
+// -----------------------------------------------------------------------------------------------------------
 // Função trazida do <conio.c> (precisa do <windows.h>
-void textcolor(int newcolor) 
+void textcolor(int newcolor) 								//TEXTCOLOR
 {
    CONSOLE_SCREEN_BUFFER_INFO csbi;
 
