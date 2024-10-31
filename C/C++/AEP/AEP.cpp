@@ -9,6 +9,9 @@ O objetivo é criar um sistema de criptografia para uma empresa que sofre com pr
 
 // Authors: Ryan R. Silva, Wellington Amorim
 
+void menu();
+void textbackground(int newcolor);
+void textcolor(int newcolor);
 // Cabeçalho da gotoxy()
 void gotoxy(int x, int y);
 
@@ -63,7 +66,7 @@ void menu() {											//MENU
 	// Loop para ler as setinhas
 	do {
 		ch = getch();
-		if(ch == 0 || ch == 224) 
+		if(ch == 0 || ch == 224){
 			if(getch() == 80) {
 				if(op < 4) {
 					op++;	
@@ -80,7 +83,7 @@ void menu() {											//MENU
 					op = 4;
 				}
 			}
-		
+        }
 		// Realce do texto de acordo com o valor de 'op'	
 		switch(op) {
 			case 1:
