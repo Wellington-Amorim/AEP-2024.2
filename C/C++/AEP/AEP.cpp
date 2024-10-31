@@ -26,9 +26,9 @@ int main() {
 	}
 	for(i = 3;i<16;i++) {
 		gotoxy(5,i);
-		printf("#");
+		printf("|");
 		gotoxy(39,i);
-		printf("#");
+		printf("|");
 	}
 	
 	gotoxy(8,4);
@@ -50,7 +50,7 @@ int main() {
 // ========================================== Área de Funções ================================================
 // Funções adicionais como menu, etc., podem ser colocadas aqui
 //------------------------------------------------------------------------------------------------------------
-void menu() {
+void menu() {                                                                   //MENU
     int op = 1, ch, i;
 
     // Desenha o menu
@@ -86,7 +86,7 @@ void menu() {
 }
 //------------------------------------------------------------------------------------------------------------
 // Função para definir a posição do cursor no console
-void gotoxy(int x, int y) {
+void gotoxy(int x, int y) {                                                     //GOTOXY
     COORD c;
     c.X = x - 1;  // Subtrair 1 para se alinhar ao zero-based index do Windows
     c.Y = y - 1;
@@ -94,12 +94,12 @@ void gotoxy(int x, int y) {
 }
 //------------------------------------------------------------------------------------------------------------
 // Função para definir a cor do texto
-void textcolor(int color) {
+void textcolor(int color) {                                                     //TEXTCOLOR
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
 }
 //------------------------------------------------------------------------------------------------------------
 // Função para definir a cor de fundo do texto
-void textbackground(int color) {
+void textbackground(int color) {                                                //TEXTBACKGROUND
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
