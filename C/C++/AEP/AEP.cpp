@@ -29,18 +29,27 @@ return 0;
 void bordas() {
     int i;
 
-    for(i = 5;i<41;i++) {
-        gotoxy(i,2);
+    for(i = 42;i<76;i++) {      //horizontal
+        textcolor(9);
+        gotoxy(i,8);
         printf("=");
-        gotoxy(i,16);
+        gotoxy(i,22);
         printf("=");
 	}
-	for(i = 3;i<16;i++) {
-        gotoxy(5,i);
-        printf("|");
+	for(i = 9;i<22;i++) {       //vertical
         gotoxy(40,i);
-        printf("|");
+        printf("||");
+        gotoxy(76,i);
+        printf("||");
 	}
+        gotoxy(40,22);      //bordas
+        printf("#");
+        gotoxy(77,22);
+        printf("#");
+        gotoxy(40,8);
+        printf("#");
+        gotoxy(77,8);
+        printf("#");
 }
 
 // Desenha o menu
@@ -48,7 +57,8 @@ void menu() {
     int op = 0, ch, i;
 
     bordas();
-    gotoxy(17,4);
+    textcolor(11);
+    gotoxy(53,10);
     printf("--- MENU ---");
 
     do {
@@ -65,24 +75,24 @@ void menu() {
 
             switch (i) {
             case 0:
-                gotoxy(7,6);
-                printf("[ Cadastrar Usuário ]");
+                gotoxy(48,12);
+                printf("[ Cadastrar Usuário  ]");
                 break;
             case 1:
-                gotoxy(7,7);
-                printf("[  Alterar Usuário  ]");
+                gotoxy(48,14);
+                printf("[  Alterar Usuário   ]");
                 break;
             case 2:
-                gotoxy(7,8);
-                printf("[  Excluir Usuário  ]");
+                gotoxy(48,16);
+                printf("[  Excluir Usuário   ]");
                 break;
             case 3:
-                gotoxy(7,9);
-                printf("[  Listar Usuários  ]");
+                gotoxy(48,18);
+                printf("[  Listar Usuários   ]");
                 break;
             case 4:
-                gotoxy(7,10);
-                printf("[  Créditos         ]");
+                gotoxy(48,20);
+                printf("[  Créditos          ]");
                 break;
             }
         }
