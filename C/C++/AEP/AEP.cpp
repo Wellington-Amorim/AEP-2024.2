@@ -11,9 +11,16 @@ O objetivo é criar um sistema de criptografia para uma empresa que sofre com pr
 
 void bordas();
 void menu();
+void cadastrarUsuario();
+void alterarUsuario();
+void excluirUsuario();
+void listarUsuarios();
+void mostraCreditos();
 void gotoxy(int x, int y);
 void textcolor(int color);
 void textbackground(int color);
+void hideCursor();
+void showCursor();
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
@@ -60,10 +67,11 @@ void menu() {
     textcolor(11);
     gotoxy(53,10);
     printf("--- MENU ---");
+    hideCursor();
 
     do {
         // Imprime de acordo com "op"
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < 5; i++) {
             if(op == i) {
                 textcolor(0);
                 textbackground(15);
@@ -104,7 +112,7 @@ void menu() {
         }
 
         if (ch == 80) { // seta para baixo
-            if (op < 3) {
+            if (op < 4) {
                 op++;
             } 
             else {
@@ -115,12 +123,59 @@ void menu() {
                 op--;
             } 
             else {
-                op = 3;
+                op = 4;
             }
-        }
+        } else if (ch == 13) {
+				switch(op) {
+		    		case 0:
+		    			cadastrarUsuario();
+		    			break;
+		    		case 1:
+		    			alterarUsuario();
+						break;
+		    		case 2:
+		    			excluirUsuario();
+		    			break;
+		    		case 3:
+		    			listarUsuarios();
+						break;
+		    		case 4:
+		    			mostraCreditos();
+		    			break;
+				}
+		  		break;
+		}
     } while (ch != 27);
-    
-    
+}
+//------------------------------------------------------------------------------------------------------------
+void cadastrarUsuario() {
+	system("cls");
+	bordas();
+	getch();
+}
+//------------------------------------------------------------------------------------------------------------
+void alterarUsuario() {
+	system("cls");
+	bordas();
+	getch();
+}
+//------------------------------------------------------------------------------------------------------------
+void excluirUsuario() {
+	system("cls");
+	bordas();
+	getch();
+}
+//------------------------------------------------------------------------------------------------------------
+void listarUsuarios() {
+	system("cls");
+	bordas();
+	getch();
+}
+//------------------------------------------------------------------------------------------------------------
+void mostraCreditos() {
+	system("cls");
+	bordas();
+	getch();
 }
 //------------------------------------------------------------------------------------------------------------
 void gotoxy(int x, int y) {                                                    
@@ -132,11 +187,27 @@ void gotoxy(int x, int y) {
 //------------------------------------------------------------------------------------------------------------
 void textcolor(int color) {                                                     
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
-}
+} 
 //------------------------------------------------------------------------------------------------------------
 void textbackground(int color) {                                                
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &csbi);
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),
                             (csbi.wAttributes & 0x0F) | (color << 4));
+} 
+//------------------------------------------------------------------------------------------------------------
+void hideCursor() {
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO info;
+	info.dwSize = 100;
+	info.bVisible = FALSE;
+	SetConsoleCursorInfo(consoleHandle, &info);
+}
+//------------------------------------------------------------------------------------------------------------
+void showCursor() {
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_CURSOR_INFO info;
+	info.dwSize = 100;
+	info.bVisible = TRUE;
+	SetConsoleCursorInfo(consoleHandle, &info);
 }
