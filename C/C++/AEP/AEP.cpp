@@ -57,8 +57,8 @@ void bordas() {
         printf("#");
         gotoxy(77,8);
         printf("#");
-        
-        printf("\n\n\n\n\n\n\n\n\n\n\n\n\n");
+           
+        textcolor(15);
 }
 
 // Desenha o menu
@@ -66,9 +66,10 @@ void menu() {
     int op = 0, ch, i;
 
     bordas();
-    textcolor(11);
-    gotoxy(53,10);
-    printf("--- MENU ---");
+    textcolor(0);
+    textbackground(9);
+    gotoxy(42,9);
+    printf("              M E N U             ");
     hideCursor();
 
     do {
@@ -152,30 +153,56 @@ void menu() {
 //------------------------------------------------------------------------------------------------------------
 void cadastrarUsuario() {
 	bordas();
+	
+	textcolor(10);
+    gotoxy(46,9);
+    printf("--- Cadastrar  Usuário ---");
+    
 	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void alterarUsuario() {
 	bordas();
+	
+	textcolor(13);
+    gotoxy(47,9);
+    printf("--- Alterar  Usuário ---");
+		
 	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void excluirUsuario() {
 	bordas();
+
+	textcolor(12);
+    gotoxy(47,9);
+    printf("--- Excluir  Usuário ---");
+		
 	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void listarUsuarios() {
 	bordas();
+
+	textcolor(11);
+    gotoxy(47,9);
+    printf("--- Listar  Usuários ---");
+		
 	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void mostraCreditos() {
+	textbackground(0);
 	bordas();
+
+	textcolor(14);
+    gotoxy(51,9);
+    printf("--- Créditos ---");
+		
 	getch();
 	menu();
 }
