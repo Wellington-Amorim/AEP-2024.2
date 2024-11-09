@@ -67,7 +67,7 @@ void menu() {
 
     bordas();
     textcolor(0);
-    textbackground(9);
+    textbackground(1);
     gotoxy(42,9);
     printf("              M E N U             ");
     hideCursor();
@@ -152,57 +152,142 @@ void menu() {
 }
 //------------------------------------------------------------------------------------------------------------
 void cadastrarUsuario() {
+	int x=42,y=9;
 	bordas();
 	
-	textcolor(10);
-    gotoxy(46,9);
+	//interface padrão
+	textcolor(10);								
+    gotoxy(x+4,y);
     printf("--- Cadastrar  Usuário ---");
+    
+    textcolor(0);
+    textbackground(8);
+    gotoxy(x+1,y+2);
+    printf("Usuário:                       ");
+
+    gotoxy(x+1,y+4);
+    printf("Senha:                         ");
+	
+	gotoxy(x+1,y+6);
+    printf("Confirmar senha:               ");    
+    textcolor(0);
+    
     
 	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void alterarUsuario() {
+	int x=42,y=9;
 	bordas();
 	
-	textcolor(13);
+	//interface padrão
+	textcolor(13);								
     gotoxy(47,9);
     printf("--- Alterar  Usuário ---");
+    
+    textcolor(0);
+    textbackground(8);
+    gotoxy(x+1,y+2);
+    printf("Usuário:                       ");
+    
+    gotoxy(x+1,y+4);
+    printf("Modificar:                     ");
+
+    gotoxy(x+1,y+6);
+    printf("Nova senha:                    ");
+	
+	gotoxy(x+1,y+8);
+    printf("Confirmar senha:               ");    
+    textcolor(0);
 		
 	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void excluirUsuario() {
+	int x=42,y=9;
 	bordas();
-
-	textcolor(12);
+	
+	//interface padrão
+	textcolor(12);								
     gotoxy(47,9);
     printf("--- Excluir  Usuário ---");
+    
+    textcolor(0);
+    textbackground(8);
+    gotoxy(x+1,y+2);
+    printf("Usuário:                       ");
+    
+    //quadrado vermelho
+   	textbackground(4);                      
+    for(int i=0;i<3;i++){
+    	gotoxy(x+1,y+5+i);
+    	printf("                ");
+		y+=1;
+		
+		if(i<2){
+			gotoxy(x+1,y+5+i);
+    		printf("                ");
+    	}
+	}
+	gotoxy(x+5,y+4);
+	printf("EXCLUIR");
+	textbackground(0);
+	
+	textcolor(7);
+	gotoxy(x+23,y+4);
+	printf("SAIR");
 		
 	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void listarUsuarios() {
+	int x=42,y=9;
 	bordas();
 
 	textcolor(11);
     gotoxy(47,9);
     printf("--- Listar  Usuários ---");
-		
+	
+	//fundo cinza
+	textcolor(0);	 
+    textbackground(8);                          
+    for(int i=0;i<12;i++){
+    	gotoxy(x,y+i+1);
+    	printf("                                  "); 	
+	}
+ 	textcolor(0);
+				
 	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void mostraCreditos() {
+	int x=42,y=9;
+	
 	textbackground(0);
 	bordas();
 
 	textcolor(14);
     gotoxy(51,9);
     printf("--- Créditos ---");
-		
+    
+    //fundo amarelo
+   	textbackground(14);                      
+    for(int i=0;i<12;i++){
+    	gotoxy(x,y+i+1);
+    	printf("                                  "); 	
+	}
+	
+	//futuro conteúdo
+	textcolor(0);								
+	textbackground(14); 
+	gotoxy(x+11,y+6);
+	printf("CARREGANDO...");
+    textbackground(0);
+    
 	getch();
 	menu();
 }
