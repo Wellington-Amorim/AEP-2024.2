@@ -67,11 +67,12 @@ void bordas() {
            
         textcolor(15);
 }
-
+//--------------------------------------------------------------------------------------------------------
 // Desenha o menu
 void menu() {                                                                  
     int op = 0, ch, i;
 
+	system("cls");
     bordas();
     textcolor(0);
     textbackground(1);
@@ -193,11 +194,13 @@ void cadastrarUsuario() {
     	gotoxy(x+9,y+2);
 		showCursor();
 		
+		
 		textcolor(0);
 		textbackground(8);
 		fgets(usuario, sizeof(usuario), stdin);
 		
 		if(strlen(usuario) < 5) {
+			hideCursor();
 			gotoxy(x+1,y+8);
 			textcolor(4);
 			printf("Usuário: mínimo 4 caracteres.");
@@ -406,6 +409,7 @@ void alterarUsuario() {
 			}
 		}
 		if(usuarioEnc == false) {
+			hideCursor();
 			gotoxy(x+1,y+8);
 			textcolor(4);
 			printf("Usuário não encontrado!");
@@ -790,7 +794,7 @@ void listarUsuarios() {
 //------------------------------------------------------------------------------------------------------------
 void mostraCreditos() {
 	int x=42,y=9;
-	char c;
+	char ch;
 	
 	textbackground(0);
 	bordas();
@@ -837,10 +841,10 @@ char lin[13][100] = {                   //|
 			sleep(1);
 		}
 		for(int j=0; j < strlen(lin[i]); j++){	
-			c = lin[i][j];
-			printf("%c",c);
+			ch = lin[i][j];
+			printf("%c",ch);
 			fflush(stdout);
-			usleep(40000);	
+			usleep(10000);	
 		}
 		y++;	
 	} 
@@ -851,8 +855,12 @@ char lin[13][100] = {                   //|
 	textcolor(0);
 	textbackground(14);
 	
-	fflush(stdout);		
-	getch();
+	//retorna
+	fflush(stdin);		
+	if(getch() == 27) {
+		textbackground(0);
+		menu();
+	}
 
 	telinha();
 	
@@ -886,18 +894,113 @@ char lin[13][100] = {                   //|
 			textbackground(14);
 		}
 		for(int j=0; j < strlen(lin[i]); j++){	
-			c = lin[i][j];
-			printf("%c",c);
+			ch = lin[i][j];
+			printf("%c",ch);
 			fflush(stdout);
-			usleep(40000);	
+			usleep(10000);	
 		}
 		y++;	
 	}
+
+	
+	fflush(stdin);		
+	if(getch() == 27) {
+		textbackground(0);
+		menu();
+	}
+	
+	memset(lin, '\0', sizeof(lin));
+	
+	strcpy(lin[0], "        *****     *****       ");
+	strcpy(lin[1], "      *       * *       *     ");
+	strcpy(lin[2], "     *         *         *    ");
+	strcpy(lin[3], "     *                  *     ");
+	strcpy(lin[4], "       *              *       ");
+	strcpy(lin[5], "         *          *         ");
+	strcpy(lin[6], "           *     *            ");
+	strcpy(lin[7], "              *               ");
+	strcpy(lin[8], "MUUUUITO OBRIGADO PROFESSORES!");
+	
+	
+	textcolor(0);
+    textbackground(12);
+    telinha();
+	for(int i=0; i<9; i++){
+		usleep(50000);
+		gotoxy(x+1,y-11);
+		printf("%s", lin[i]);
+		y++;
+	}
+	
+	sleep(2);	
+	telinha();
+	sleep(2);
+	
+	memset(lin, '\0', sizeof(lin));
+	strcpy(lin[0], "GOSTOSINHO");
+	strcpy(lin[1], "CAMILA");
+	strcpy(lin[2], "CIDÃO");
+	strcpy(lin[3], "ALEXANDRE");
+	strcpy(lin[4], "MORENO");
+	strcpy(lin[5], "MESSIAS");
+	strcpy(lin[6], "JESUS");
+	strcpy(lin[7], "JOÃO PEDRO");	
+
+	int a, b, c, d, e, f, g, h;
+	a=x;
+	b=x;
+	c=x;
+	d=x;
+	e=x;
+	f=x;
+	g=x;
+	h=x;		
+	for(int i=0; i<20; i++){
+		usleep(40000);
+		telinha();
+		
+		if(i >= 2){			//GOSTOSINHO
+			gotoxy(a,y-20);
+        	printf("%s", lin[0]);
+        	a++;
+    	}
+    	if(i > 4){			//CAMILA
+			gotoxy(b,y-18);
+        	printf("%s", lin[1]);
+        	b++;
+    	}
+		if(i > 10){			//CIDÃO
+			gotoxy(c,y-17);
+        	printf("%s", lin[2]);
+        	c++;
+    	}
+    	if(i > 0){			//ALEXANDRE
+			gotoxy(d,y-16);
+        	printf("%s", lin[3]);
+        	d++;
+    	}
+    	if(i > 7){			//MORENO
+			gotoxy(e,y-15);
+        	printf("%s", lin[4]);
+        	e++;
+    	}
+    	if(i > 9){			//MESSIAS
+			gotoxy(f,y-13);
+        	printf("%s", lin[5]);
+        	f++;
+    	}
+    	if(i > 3){			//JOÃO PEDRO
+			gotoxy(h,y-11);
+        	printf("%s", lin[6]);
+        	h++;
+    	}
+	}
+	sleep(4);
+	fflush(stdin);		
 	
 	textcolor(0);
     textbackground(0);
     
-	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
