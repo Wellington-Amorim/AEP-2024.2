@@ -6,8 +6,12 @@ O objetivo é criar um sistema de criptografia para uma empresa que sofre com pr
 #include <locale.h>
 #include <windows.h>
 #include <conio.h>
+#include <ctype.h>
+#include <unistd.h>
 
 // Authors: Ryan R. Silva, Wellington Amorim
+
+FILE* arquivo;
 
 void bordas();
 void menu();
@@ -21,6 +25,9 @@ void textcolor(int color);
 void textbackground(int color);
 void hideCursor();
 void showCursor();
+void criptografar(char* text, int troca);
+void descriptografar(char* text, int troca);
+void telinha();
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
@@ -86,24 +93,24 @@ void menu() {
 
             switch (i) {
             case 0:
-                gotoxy(48,12);
-                printf("[ Cadastrar Usuário  ]");
+                gotoxy(47,12);
+                printf("   Cadastrar Usuário    ");
                 break;
             case 1:
-                gotoxy(48,14);
-                printf("[  Alterar Usuário   ]");
+                gotoxy(47,14);
+                printf("   Alterar Usuário      ");
                 break;
             case 2:
-                gotoxy(48,16);
-                printf("[  Excluir Usuário   ]");
+                gotoxy(47,16);
+                printf("   Excluir Usuário      ");
                 break;
             case 3:
-                gotoxy(48,18);
-                printf("[  Listar Usuários   ]");
+                gotoxy(47,18);
+                printf("   Listar Usuários      ");
                 break;
             case 4:
-                gotoxy(48,20);
-                printf("[  Créditos          ]");
+                gotoxy(47,20);
+                printf("   Créditos             ");
                 break;
             }
         }
@@ -149,10 +156,19 @@ void menu() {
 		  		break;
 		}
     } while (ch != 27);
+    
+    textcolor(15);
+    textbackground(0);
+    
+    printf("\n\n\n\n\n");
 }
 //------------------------------------------------------------------------------------------------------------
 void cadastrarUsuario() {
-	int x=42,y=9;
+	int x=42,y=9, i;
+	char usuario[30], senha[30], confirmaSenha[30];
+	bool upper = false, lower = false, special = false, number = false, eightChar = false;
+	char ch;
+	
 	bordas();
 	
 	//interface padrão
@@ -172,13 +188,179 @@ void cadastrarUsuario() {
     printf("Confirmar senha:               ");    
     textcolor(0);
     
+    // Input de Usuario
+    do {
+    	gotoxy(x+9,y+2);
+		showCursor();
+		
+		textcolor(0);
+		textbackground(8);
+		fgets(usuario, sizeof(usuario), stdin);
+		
+		if(strlen(usuario) < 5) {
+			gotoxy(x+1,y+8);
+			textcolor(4);
+			printf("Usuário: mínimo 4 caracteres.");
+			gotoxy(x+1,y+9);
+			printf("Pressione ESC para sair.");
+			gotoxy(x+1,y+10);
+			printf("Ou ENTER p/ continuar.");
+			
+			ch = getch();
+			
+			if(ch == 27) {
+				menu();
+				return;
+			}
+			
+			textcolor(0);
+    		textbackground(8);
+    		gotoxy(x+1,y+2);
+    		printf("Usuário:                       ");
+			textcolor(15);
+		}
+		else {
+			gotoxy(x+1,y+8);
+			textcolor(15);
+			printf("                              ");
+			gotoxy(x+1,y+9);
+			printf("                              ");
+			gotoxy(x+1,y+10);
+		} 
+	} while(strlen(usuario) < 5);		
+	
+	criptografar(usuario, 3);	
+	
+	// Input da Senha
+	do {
+		gotoxy(x+7,y+4);
+		
+		textcolor(0);
+		textbackground(8);
+		fgets(senha, sizeof(senha), stdin);	
+		
+		// VERIFICAÇÕES DA SENHA
+		// Tamanho
+		if(strlen(senha) > 8)
+			eightChar = true;
+		// Maiúsculo
+		for(i=0; i < strlen(senha); i++) {
+			if(isupper(senha[i])) {
+				upper = true;
+				break;
+			}
+		}
+		// Minúsculo
+		for(i=0; i < strlen(senha); i++) {
+			if(islower(senha[i])) {
+				lower = true;
+				break;
+			}
+		}
+		// Caractere Especial
+		for(i=0; i < strlen(senha); i++) {
+			if((senha[i] >= 33 && senha[i] <= 47) || (senha[i] >= 58 && senha[i] <= 64)) {
+				special = true;
+			} 
+		}
+		// Numero
+		for(i=0; i < strlen(senha); i++) {
+			if(isdigit(senha[i])) {
+				number = true;
+				break;
+			}
+		}
+		
+		
+		if(upper == false || lower == false || special == false || number == false || eightChar == false) {
+			gotoxy(x+1,y+8);
+			textcolor(4);
+			printf("Senha:");
+			gotoxy(x+1,y+9);
+			printf("- Mínimo 8 caracteres.");
+			gotoxy(x+1,y+10);
+			printf("- Min. 1 maiúscula e minúscula");
+			gotoxy(x+1,y+11);
+			printf("- 1 Caractere especial");
+			gotoxy(x+1,y+12);
+			printf("- 1 Número");
+			
+			textcolor(0);
+    		textbackground(8);
+    		gotoxy(x+1,y+4);
+    		printf("Senha:                         ");
+    		textcolor(15);
+		}
+		else {
+			gotoxy(x+1,y+8);
+			textcolor(15);
+			printf("                              ");
+			gotoxy(x+1,y+9);
+			printf("                              ");
+			gotoxy(x+1,y+10);
+			printf("                              ");
+			gotoxy(x+1,y+11);
+			printf("                              ");
+			gotoxy(x+1,y+12);
+			printf("                              ");
+		}	
+	} while(upper == false || lower == false || special == false || number == false || eightChar == false);
+	
+	// Input Confirma Senha
+    do {
+    	gotoxy(x+17,y+6);
+		textcolor(0);
+		textbackground(8);
+		fgets(confirmaSenha, sizeof(confirmaSenha), stdin);
+		
+		if(strcmp(senha, confirmaSenha) != 0) {
+			gotoxy(x+1,y+8);
+			textcolor(4);
+			printf("As senhas não são iguais!");
+			textcolor(0);
+    		textbackground(8);
+			gotoxy(x+1,y+6);
+    		printf("Confirmar senha:               ");    
+    		textcolor(0);	
+		}	
+		else {
+			gotoxy(x+1,y+8);
+			textcolor(15);
+			printf("                              ");
+		}
+	} while(strcmp(senha, confirmaSenha) != 0);
     
+    // Confirma sucesso do cadastro.
+	hideCursor();
+	criptografar(senha, 3);
+	
+	arquivo = fopen("cadastros.txt", "a");
+	fprintf(arquivo, usuario);
+	fprintf(arquivo,senha);
+	
+	fclose(arquivo);
+	
+	gotoxy(x+1,y+8);
+	textcolor(2);
+	textbackground(0);
+	printf("> Usuário Cadastrado com sucesso.");
+	gotoxy(x+1,y+9);
+	printf("Pressione qualquer");
+	gotoxy(x+1,y+10);
+	printf("tecla para voltar...");
+	textcolor(15);
+	textbackground(0);
+	
 	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void alterarUsuario() {
-	int x=42,y=9;
+	int x=42,y=9, i;
+	char usuario[30], novaSenha[30], confirmaNova[30], linha[255];
+	FILE* temp = fopen("temp.txt", "w");
+	bool usuarioEnc = false, upper = false, lower = false, special = false, number = false, eightChar = false, linhaUsuario = false;
+	
 	bordas();
 	
 	//interface padrão
@@ -189,24 +371,214 @@ void alterarUsuario() {
     textcolor(0);
     textbackground(8);
     gotoxy(x+1,y+2);
-    printf("Usuário:                       ");
+    printf("Usuário:                        ");
     
     gotoxy(x+1,y+4);
-    printf("Modificar:                     ");
+    printf("Nova Senha:                     ");
 
     gotoxy(x+1,y+6);
-    printf("Nova senha:                    ");
+    printf("Confirmar Senha:                ");
+	   
+    textcolor(0);
+    
+    // Input usuário
+    do {
+    	textcolor(0);
+    	textbackground(8);
+    	gotoxy(x+9,y+2);
+		showCursor();
+		fgets(usuario, sizeof(usuario), stdin);
+		
+		criptografar(usuario, 3);
+		
+		arquivo = fopen("cadastros.txt", "r");
+		
+		if(arquivo == NULL) {
+			gotoxy(x+1,y+8);
+			textcolor(4);
+			printf("Arquivo não encontrado!");
+			return;
+		}
+		
+		while(fgets(linha, sizeof(linha), arquivo) != NULL) {
+			if(strcmp(linha, usuario) == 0) {
+				usuarioEnc = true;
+			}
+		}
+		if(usuarioEnc == false) {
+			gotoxy(x+1,y+8);
+			textcolor(4);
+			printf("Usuário não encontrado!");
+			gotoxy(x+1,y+9);
+			printf("Pressione ESC para sair.");
+			gotoxy(x+1,y+10);
+			printf("Ou enter p/ continuar.");
+			if(getch() == 27) {
+				menu();
+				return;
+			}
+			textcolor(0);
+    		textbackground(8);
+    		gotoxy(x+1,y+2);
+    		printf("Usuário:                       ");
+    		textcolor(15);
+		}
+		else {
+			gotoxy(x+1,y+8);
+			textcolor(0);
+			printf("                       ");
+			gotoxy(x+1,y+9);
+			printf("                       ");
+			gotoxy(x+1,y+10);
+			printf("                       ");
+		}
+	} while(usuarioEnc == false);
+	
+	// Input Senha
+	do {
+		textcolor(0);
+		textbackground(8);
+		gotoxy(x+12,y+4);
+		fgets(novaSenha, sizeof(novaSenha), stdin);	
+		
+		// VERIFICAÇÕES DA SENHA
+		// Tamanho
+		if(strlen(novaSenha) > 8)
+			eightChar = true;
+		// Maiúsculo
+		for(i=0; i < strlen(novaSenha); i++) {
+			if(isupper(novaSenha[i])) {
+				upper = true;
+				break;
+			}
+		}
+		// Minúsculo
+		for(i=0; i < strlen(novaSenha); i++) {
+			if(islower(novaSenha[i])) {
+				lower = true;
+				break;
+			}
+		}
+		// Caractere Especial
+		for(i=0; i < strlen(novaSenha); i++) {
+			if((novaSenha[i] >= 33 && novaSenha[i] <= 47) || (novaSenha[i] >= 58 && novaSenha[i] <= 64)) {
+				special = true;
+			} 
+		}
+		// Numero
+		for(i=0; i < strlen(novaSenha); i++) {
+			if(isdigit(novaSenha[i])) {
+				number = true;
+				break;
+			}
+		}
+		
+		if(upper == false || lower == false || special == false || number == false || eightChar == false) {
+			gotoxy(x+1,y+8);
+			textcolor(4);
+			printf("Senha:");
+			gotoxy(x+1,y+9);
+			printf("- Mínimo 8 caracteres.");
+			gotoxy(x+1,y+10);
+			printf("- Min. 1 maiúscula e minúscula");
+			gotoxy(x+1,y+11);
+			printf("- 1 Caractere especial");
+			gotoxy(x+1,y+12);
+			printf("- 1 Número");	
+			
+			textcolor(0);
+    		textbackground(8);
+    		gotoxy(x+1,y+4);
+    		printf("Nova Senha:                     ");
+		}
+		else {
+			gotoxy(x+1,y+8);
+			textcolor(15);
+			printf("                              ");
+			gotoxy(x+1,y+9);
+			printf("                              ");
+			gotoxy(x+1,y+10);
+			printf("                              ");
+			gotoxy(x+1,y+11);
+			printf("                              ");
+			gotoxy(x+1,y+12);
+			printf("                              ");
+		}
+	} while(upper == false || lower == false || special == false || number == false || eightChar == false);
+	
+	
+	// Confirma Senha
+	do {
+		textcolor(0);
+		textbackground(8);
+		gotoxy(x+17,y+6);
+		fgets(confirmaNova, sizeof(confirmaNova), stdin);
+		
+		if(strcmp(confirmaNova, novaSenha) != 0) {
+			gotoxy(x+1,y+8);
+			textcolor(4);
+			printf("As senhas não são iguais!");
+			
+			textcolor(0);
+    		textbackground(8);
+    		gotoxy(x+1,y+6);
+    		printf("Confirmar Senha:                    ");
+		}
+		else {
+			gotoxy(x+1,y+8);
+			textcolor(0);
+			printf("                         ");
+			textcolor(15);	
+		}
+	} while(strcmp(confirmaNova, novaSenha) != 0);
+	
+	criptografar(novaSenha, 3);
+	hideCursor();
+	
+	rewind(arquivo);
+		
+	while(fgets(linha, sizeof(linha), arquivo) != NULL) {
+		if(strcmp(linha, usuario) == 0) {
+			linhaUsuario = true;
+			fprintf(temp, "%s", linha);
+			continue;
+		}
+		
+		if(linhaUsuario == true) {
+			fprintf(temp, "%s", novaSenha);
+			linhaUsuario = false;
+		} else {
+			fprintf(temp, "%s", linha);	
+		}
+	}
+	
+	fclose(arquivo);
+	fclose(temp);
+	
+	remove("cadastros.txt");
+	rename("temp.txt", "cadastros.txt");
 	
 	gotoxy(x+1,y+8);
-    printf("Confirmar senha:               ");    
-    textcolor(0);
+	textcolor(2);
+	textbackground(0);
+	printf("> Usuário Alterado com sucesso.");
+	gotoxy(x+1,y+9);
+	printf("Pressione qualquer");
+	gotoxy(x+1,y+10);
+	printf("tecla para voltar...");
+	textcolor(15);
+	textbackground(0);
 		
 	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void excluirUsuario() {
+	FILE* temp;
 	int x=42,y=9;
+	int op = 0, ch, i, ver = 0;
+	char usuario[30], linha[255];
+	bool encontrado = false;
 	bordas();
 	
 	//interface padrão
@@ -231,6 +603,7 @@ void excluirUsuario() {
     		printf("                ");
     	}
 	}
+	
 	gotoxy(x+5,y+4);
 	printf("EXCLUIR");
 	textbackground(0);
@@ -238,13 +611,121 @@ void excluirUsuario() {
 	textcolor(7);
 	gotoxy(x+23,y+4);
 	printf("SAIR");
+	
+	// Input nome do usuário
+	do {
+		gotoxy(x+9,y-1);
+		showCursor();
+		textcolor(0);
+    	textbackground(8);
+		fgets(usuario, sizeof(usuario), stdin);
 		
+		criptografar(usuario, 3);
+		
+		hideCursor();
+		
+		do {
+			for(i=0; i<2; i++) {
+				if(op == i) {
+					textcolor(9);
+				}	
+				else {
+					textcolor(0);
+				}
+				
+				switch (i) {
+					case 0:
+						gotoxy(43,19);
+						printf("^^^^^^^^^^^^^^^^");
+						break;
+					case 1:
+						gotoxy(59,19);
+						printf("^^^^^^^^^^^^^^^^");
+						break;
+			    }		
+			}
+			
+			ch = getch();
+	        if (ch == 0 || ch == 224) {
+	           ch = getch();
+	        }
+	        
+	        if(ch == 77) {
+	        	if(op < 1) {
+	        		op++;
+				}
+				else {
+					op = 0;
+				}
+			} 
+			else if(ch == 75) {
+				if(op > 0) {
+					op--;
+				}
+				else {
+					op = 1;
+				}	
+			}
+		} while(ch != 13);
+		
+	} while(ch != 13);
+	
+	arquivo = fopen("cadastros.txt", "r");
+	temp = fopen("temp.txt", "w");
+	
+	switch(op) {
+		case 0:
+			while(fgets(linha, sizeof(linha), arquivo) != NULL) {
+				if(strcmp(linha, usuario) != 0 && ver < 1) {
+					fprintf(temp, linha);
+				}
+				else if(strcmp(linha, usuario) == 0) {
+					ver = 1;
+					encontrado = true;	
+				}
+				else {
+					ver = 0;
+				}	
+			}
+			break;
+		case 1:
+			menu();
+			return;			
+			break;
+	}
+	
+	fclose(arquivo);
+	fclose(temp);
+	
+	remove("cadastros.txt");
+	rename("temp.txt", "cadastros.txt");
+	
+	gotoxy(x+1,y+7);
+	if(encontrado) {
+		textcolor(2);
+		printf("Usuario removido.");
+		textcolor(15);
+	}
+	else {
+		textcolor(4);
+		printf("Usuário não encontrado.");
+		textcolor(15);
+	}
+	
+	gotoxy(x+1,y+8);
+	printf("Pressione qualquer botão");
+	gotoxy(x+1,y+9);
+	printf("Para voltar...");
+	
 	getch();
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void listarUsuarios() {
-	int x=42,y=9;
+	int x=42,y=9, i = y+3;
+	char linha[255];
+	char ch;
+	int op = 0;
 	bordas();
 
 	textcolor(11);
@@ -258,14 +739,58 @@ void listarUsuarios() {
     	gotoxy(x,y+i+1);
     	printf("                                  "); 	
 	}
- 	textcolor(0);
-				
-	getch();
+ 	textcolor(1);
+ 	textbackground(8);
+ 	gotoxy(x+2,y+2);
+ 	printf("Usuário");
+ 	gotoxy(x+15,y+2);
+ 	printf("Senha");
+ 	gotoxy(x,y+14);
+ 	textbackground(0);
+ 	textcolor(15);
+ 	printf("Pressione ESC p/ voltar");
+ 	
+ 	arquivo = fopen("cadastros.txt", "r");
+ 	
+ 	if(arquivo == NULL) {
+ 		gotoxy(x+2,y+5);
+ 		textcolor(0);
+ 		textbackground(8);
+ 		printf("Nenhum usuário encontrado.");
+ 		menu();
+		return;
+	 }
+ 	do {
+		while(fgets(linha, sizeof(linha), arquivo) != NULL) {
+		descriptografar(linha, 3);
+		textcolor(0);
+		textbackground(8);
+		gotoxy(x+2,i);
+		printf("%s",linha);
+					
+		fgets(linha, sizeof(linha), arquivo);
+		gotoxy(x+15,i);
+		printf("%s",linha);
+					
+		i++;
+		textbackground(0);
+		textcolor(15);
+		}
+		
+		ch = getch();
+		if(ch == 224 || ch < 0) {
+			ch = getch();
+		}
+	} while(ch != 27);
+ 	 
+ 	fclose(arquivo);
+	system("cls");
 	menu();
 }
 //------------------------------------------------------------------------------------------------------------
 void mostraCreditos() {
 	int x=42,y=9;
+	char c;
 	
 	textbackground(0);
 	bordas();
@@ -276,20 +801,112 @@ void mostraCreditos() {
     
     //fundo amarelo
    	textbackground(14);                      
-    for(int i=0;i<12;i++){
-    	gotoxy(x,y+i+1);
-    	printf("                                  "); 	
-	}
+	telinha();
 	
-	//futuro conteúdo
+	//carregando
 	textcolor(0);								
 	textbackground(14); 
 	gotoxy(x+11,y+6);
 	printf("CARREGANDO...");
+	sleep(1.5);		
+	gotoxy(x+11,y+6);
+	printf("             ");
+	
+	
+char lin[13][100] = {                   //|
+        " Esse projeto foi feito por Ryan",
+        "Raniel e Wellington Amorim",
+		"no nosso 2º semestre em Engenharia",
+		"de Software.",
+		" Nós só temos a agradecer por tudo",
+		"que aconteceu nesse curto tempo!",
+        " Um grande abraço a todos os",
+		"professores, amigos, e todos que",
+		"nos acompanharam",
+		"até o presente momento.  ",
+        "", ""
+    };
+	
+	for(int i=0; i<13; i++){
+		gotoxy(x,y+2);
+		
+		if(i == 4){
+			sleep(1);
+		}
+		if(i == 6){
+			sleep(1);
+		}
+		for(int j=0; j < strlen(lin[i]); j++){	
+			c = lin[i][j];
+			printf("%c",c);
+			fflush(stdout);
+			usleep(40000);	
+		}
+		y++;	
+	} 
+	textcolor(12);	 
+    textbackground(14);
+	gotoxy(x+24,y-2);
+	printf("<3");
+	textcolor(0);
+	textbackground(14);
+	
+	fflush(stdout);		
+	getch();
+
+	telinha();
+	
+	// limpa a matriz
+	memset(lin, '\0', sizeof(lin));
+	
+
+	// frase do Ryanzinho  "É melhor cometer erros no seu
+	// próprio caminho do que vencer no caminho de outra pessoa"
+
+    strcpy(lin[0], " Agora, fique com esta frase");
+    strcpy(lin[1], "recomendada pelo Ryanzinho...");
+    strcpy(lin[2], "                             ");
+    strcpy(lin[3], "   \"É melhor cometer erros no");
+    strcpy(lin[4], "       seu próprio caminho  ");
+    strcpy(lin[5], "     do que vencer no caminho  ");
+    strcpy(lin[6], "        de outra pessoa...\"");
+    strcpy(lin[7], "                             ");
+    strcpy(lin[8], "              ~ Fyodor Dotoesvky");
+    
+    x=42,y=9;
+    gotoxy(x,y);
+	for(int i=0; i<13; i++){
+		gotoxy(x,y+2);
+		if(i == 3){
+			textcolor(8);
+			textbackground(14);
+		}
+		if(i == 8){
+			textcolor(7);
+			textbackground(14);
+		}
+		for(int j=0; j < strlen(lin[i]); j++){	
+			c = lin[i][j];
+			printf("%c",c);
+			fflush(stdout);
+			usleep(40000);	
+		}
+		y++;	
+	}
+	
+	textcolor(0);
     textbackground(0);
     
 	getch();
 	menu();
+}
+//------------------------------------------------------------------------------------------------------------
+void telinha(){
+	int x=42,y=9;
+	for(int i=0;i<12;i++){
+    	gotoxy(x,y+i+1);
+    	printf("                                  "); 	
+	}	
 }
 //------------------------------------------------------------------------------------------------------------
 void gotoxy(int x, int y) {                                                    
@@ -324,4 +941,20 @@ void showCursor() {
 	info.dwSize = 100;
 	info.bVisible = TRUE;
 	SetConsoleCursorInfo(consoleHandle, &info);
+}
+//------------------------------------------------------------------------------------------------------------
+// Criptografa o texto usando a Cifra de César
+void criptografar(char *text, int troca) {
+	
+    for (int i = 0; i < strlen(text); i++) {
+        if (text[i] >= 'a' && text[i] <= 'z') {
+            text[i] = (text[i] - 'a' + troca) % 26 + 'a';
+        } else if (text[i] >= 'A' && text[i] <= 'Z') {
+            text[i] = (text[i] - 'A' + troca) % 26 + 'A';
+        }
+    }
+}
+//------------------------------------------------------------------------------------------------------------
+void descriptografar(char *text, int troca) {
+    criptografar(text, 26 - troca);
 }
