@@ -391,6 +391,7 @@ void alterarUsuario() {
     	gotoxy(x+9,y+2);
 		showCursor();
 		fgets(usuario, sizeof(usuario), stdin);
+			
 		
 		criptografar(usuario, 3);
 		
@@ -919,7 +920,7 @@ char lin[13][100] = {                   //|
 	strcpy(lin[5], "         *          *         ");
 	strcpy(lin[6], "           *     *            ");
 	strcpy(lin[7], "              *               ");
-	strcpy(lin[8], "MUUUUITO OBRIGADO PROFESSORES!");
+	strcpy(lin[8], "MUUUITO OBRIGADO, PROFESSORES!");
 	
 	
 	textcolor(0);
@@ -956,7 +957,7 @@ char lin[13][100] = {                   //|
 	g=x;
 	h=x;		
 	for(int i=0; i<20; i++){
-		usleep(40000);
+		usleep(70000);
 		telinha();
 		
 		if(i >= 2){			//GOSTOSINHO
@@ -989,10 +990,15 @@ char lin[13][100] = {                   //|
         	printf("%s", lin[5]);
         	f++;
     	}
-    	if(i > 3){			//JOÃO PEDRO
-			gotoxy(h,y-11);
+    	if(i > 1){			//JESUS
+			gotoxy(g,y-12);
         	printf("%s", lin[6]);
-        	h++;
+        	g++;
+    	}
+        if(i > 9){			//JOÃO PEDRO
+			gotoxy(h,y-10);
+        	printf("%s", lin[7]);
+        	h++;	
     	}
 	}
 	sleep(4);
